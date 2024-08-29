@@ -27,7 +27,7 @@ repositories {
 dependencies {
     implementation("org.checkerframework:checker:3.46.0")
     implementation("org.checkerframework:checker-qual:3.46.0")
-    implementation("com.google.errorprone:error_prone_check_api:2.30.0")
+    implementation("com.google.errorprone:error_prone_check_api:2.31.0")
     implementation("org.jspecify:jspecify:1.0.0")
     compileOnly("org.springframework:spring-context:6.1.12")
 
