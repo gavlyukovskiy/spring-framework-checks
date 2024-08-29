@@ -1,15 +1,12 @@
 package com.github.gavlyukovskiy.spring.checker;
 
-import com.google.errorprone.CompilationTestHelper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-import java.nio.file.Path;
-import java.util.List;
+class ConfigurationMustNotProxyTargetClassesTest extends BaseCheckerTest {
 
-class ConfigurationClassMustNotProxyTargetClassesTest {
-
-    @TempDir @SuppressWarnings("NullAway") private Path temporaryFolder;
+    ConfigurationMustNotProxyTargetClassesTest() {
+        super(ConfigurationMustNotProxyTargetClasses.class);
+    }
 
     @Test
     void shouldFailOnConfigurationClassWithoutProxyBeanMethods() {
@@ -18,7 +15,7 @@ class ConfigurationClassMustNotProxyTargetClassesTest {
                 """
                 import org.springframework.context.annotation.Configuration;
 
-                // BUG: Diagnostic contains: @Configuration annotation must use 'proxyBeanMethods = false'
+                // BUG: Diagnostic contains: @Configuration must use 'proxyBeanMethods = false'
                 @Configuration
                 class TestConfiguration {}
                 """
@@ -32,7 +29,7 @@ class ConfigurationClassMustNotProxyTargetClassesTest {
                 """
                 import org.springframework.context.annotation.Configuration;
 
-                // BUG: Diagnostic contains: @Configuration annotation must use 'proxyBeanMethods = false'
+                // BUG: Diagnostic contains: @Configuration must use 'proxyBeanMethods = false'
                 @Configuration(proxyBeanMethods = true)
                 class TestConfiguration {}
                 """
@@ -65,8 +62,30 @@ class ConfigurationClassMustNotProxyTargetClassesTest {
         ).doTest();
     }
 
-    protected CompilationTestHelper makeTestHelper() {
-        return CompilationTestHelper.newInstance(ConfigurationClassMustNotProxyTargetClasses.class, getClass())
-                .setArgs(List.of("-d", temporaryFolder.toString()));
+    @Test
+    void shouldPassIfMetaAnnotatedWithProxyDisabled() {
+        makeTestHelper().addSourceLines(
+                "TestConfiguration.java",
+                """
+                import com.github.gavlyukovskiy.spring.checker.testannotations.MetaConfigurationWithProxyDisabled;
+
+                @MetaConfigurationWithProxyDisabled
+                class TestConfiguration {}
+                """
+        ).doTest();
+    }
+
+    @Test
+    void shouldPassIfMetaAnnotatedWithProxyEnabled() {
+        makeTestHelper().addSourceLines(
+                "TestConfiguration.java",
+                """
+                import com.github.gavlyukovskiy.spring.checker.testannotations.MetaConfigurationWithProxyEnabled;
+
+                // BUG: Diagnostic contains: @MetaConfigurationWithProxyEnabled is meta-annotated with @Configuration that must use 'proxyBeanMethods = false'
+                @MetaConfigurationWithProxyEnabled
+                class TestConfiguration {}
+                """
+        ).doTest();
     }
 }
