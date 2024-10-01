@@ -45,7 +45,7 @@ dependencies {
     }
     testImplementation("com.google.errorprone:error_prone_test_helpers:2.32.0")
 
-    errorprone("com.google.errorprone:error_prone_core:2.32.0")
+    errorprone("com.google.errorprone:error_prone_core:2.33.0")
     errorprone("com.uber.nullaway:nullaway:0.11.3")
 }
 
