@@ -40,7 +40,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.springframework:spring-context:6.1.13")
     testImplementation("org.assertj:assertj-core:3.26.3")
-    testImplementation("org.checkerframework:framework-test:3.47.0") {
+    testImplementation("org.checkerframework:framework-test:3.48.0") {
         exclude(group = "junit", module = "junit")
     }
     testImplementation("com.google.errorprone:error_prone_test_helpers:2.32.0")
