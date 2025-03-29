@@ -19,9 +19,9 @@ import java.util.function.Predicate;
         summary = "@Bean methods must not be invoked, instead the Spring bean must be injected",
         severity = BugPattern.SeverityLevel.ERROR,
         linkType = BugPattern.LinkType.CUSTOM,
-        link = CustomLink.URL + "beanmethodsmustnotbeinvoked"
+        link = CustomLink.URL + "DirectInvocationOfBeanMethod"
 )
-public class BeanMethodsMustNotBeInvoked
+public class DirectInvocationOfBeanMethod
         extends BugChecker
         implements BugChecker.MethodInvocationTreeMatcher {
 

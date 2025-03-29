@@ -2,10 +2,10 @@ package com.github.gavlyukovskiy.spring.checker;
 
 import org.junit.jupiter.api.Test;
 
-class ConfigurationMustNotProxyTargetClassesTest extends BaseCheckerTest {
+class ProxyTargetClassesOnConfigurationTest extends BaseCheckerTest {
 
-    ConfigurationMustNotProxyTargetClassesTest() {
-        super(ConfigurationMustNotProxyTargetClasses.class);
+    ProxyTargetClassesOnConfigurationTest() {
+        super(ProxyTargetClassesOnConfiguration.class);
     }
 
     @Test

@@ -22,9 +22,9 @@ import static com.google.errorprone.matchers.Description.NO_MATCH;
         summary = "@Configuration must use 'proxyBeanMethods = false'",
         severity = BugPattern.SeverityLevel.ERROR,
         linkType = BugPattern.LinkType.CUSTOM,
-        link = CustomLink.URL + "configurationmustnotproxytargetclasses"
+        link = CustomLink.URL + "ProxyTargetClassesOnConfiguration"
 )
-public class ConfigurationMustNotProxyTargetClasses
+public class ProxyTargetClassesOnConfiguration
         extends BugChecker
         implements BugChecker.AnnotationTreeMatcher {
 
