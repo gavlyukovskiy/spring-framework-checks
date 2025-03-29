@@ -2,10 +2,10 @@ package com.github.gavlyukovskiy.spring.checker;
 
 import org.junit.jupiter.api.Test;
 
-class BeanMethodsMustNotBeInvokedTest extends BaseCheckerTest {
+class DirectInvocationOfBeanMethodTest extends BaseCheckerTest {
 
-    BeanMethodsMustNotBeInvokedTest() {
-        super(BeanMethodsMustNotBeInvoked.class);
+    DirectInvocationOfBeanMethodTest() {
+        super(DirectInvocationOfBeanMethod.class);
     }
 
     @Test

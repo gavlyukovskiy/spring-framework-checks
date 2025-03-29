@@ -1,0 +1,50 @@
+package com.github.gavlyukovskiy.spring.checker;
+
+import org.junit.jupiter.api.Test;
+
+class NonConstructorInjectionTest extends BaseCheckerTest {
+
+    NonConstructorInjectionTest() {
+        super(NonConstructorInjection.class);
+    }
+
+    @Test
+    void shouldFailOnFieldInjection() {
+        makeTestHelper().addSourceLines(
+                "TestConfiguration.java",
+                """
+                import org.springframework.beans.factory.annotation.Autowired;
+                import org.springframework.stereotype.Component;
+
+                @Component
+                class TestConfiguration {
+                    @Autowired
+                    // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
+                    private String dependency;
+                }
+                """
+        ).doTest();
+    }
+
+    @Test
+    void shouldFailOnMethodInjection() {
+        makeTestHelper().addSourceLines(
+                "TestConfiguration.java",
+                """
+                import org.springframework.beans.factory.annotation.Autowired;
+                import org.springframework.stereotype.Component;
+
+                @Component
+                class TestConfiguration {
+                    private String dependency;
+
+                    @Autowired
+                    // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
+                    public void setDependency(String dependency) {
+                        this.dependency = dependency;
+                    }
+                }
+                """
+        ).doTest();
+    }
+}
