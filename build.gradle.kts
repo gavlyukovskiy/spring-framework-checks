@@ -39,7 +39,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.springframework:spring-context:6.2.1")
-    testImplementation("org.assertj:assertj-core:3.26.3")
+    testImplementation("org.assertj:assertj-core:3.27.3")
     testImplementation("org.checkerframework:framework-test:3.48.3") {
         exclude(group = "junit", module = "junit")
     }
