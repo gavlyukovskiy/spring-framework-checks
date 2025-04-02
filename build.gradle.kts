@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.checkerframework:checker:3.48.3")
+    implementation("org.checkerframework:checker:3.49.2")
     implementation("org.checkerframework:checker-qual:3.49.1")
     implementation("com.google.errorprone:error_prone_check_api:2.37.0")
     implementation("org.jspecify:jspecify:1.0.0")
@@ -40,7 +40,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.springframework:spring-context:6.2.1")
     testImplementation("org.assertj:assertj-core:3.26.3")
-    testImplementation("org.checkerframework:framework-test:3.48.3") {
+    testImplementation("org.checkerframework:framework-test:3.49.2") {
         exclude(group = "junit", module = "junit")
     }
     testImplementation("com.google.errorprone:error_prone_test_helpers:2.36.0")
