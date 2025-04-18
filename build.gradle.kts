@@ -3,7 +3,7 @@ import net.ltgt.gradle.errorprone.errorprone
 plugins {
     `java-library`
     `maven-publish`
-    id("net.ltgt.errorprone") version "4.1.0"
+    id("net.ltgt.errorprone") version "4.2.0"
     id("com.adarshr.test-logger") version "4.0.0"
 }
 
