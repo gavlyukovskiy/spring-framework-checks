@@ -43,7 +43,7 @@ dependencies {
     testImplementation("org.checkerframework:framework-test:3.48.3") {
         exclude(group = "junit", module = "junit")
     }
-    testImplementation("com.google.errorprone:error_prone_test_helpers:2.36.0")
+    testImplementation("com.google.errorprone:error_prone_test_helpers:2.40.0")
 
     errorprone("com.google.errorprone:error_prone_core:2.32.0")
     errorprone("com.uber.nullaway:nullaway:0.12.2")
