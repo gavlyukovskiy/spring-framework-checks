@@ -29,7 +29,7 @@ dependencies {
     implementation("org.checkerframework:checker-qual:3.49.1")
     implementation("com.google.errorprone:error_prone_check_api:2.37.0")
     implementation("org.jspecify:jspecify:1.0.0")
-    compileOnly("org.springframework:spring-context:6.2.1")
+    compileOnly("org.springframework:spring-context:6.2.9")
 
     compileOnly("com.google.errorprone:javac:9+181-r4173-1")
 
@@ -38,7 +38,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.springframework:spring-context:6.2.1")
+    testImplementation("org.springframework:spring-context:6.2.9")
     testImplementation("org.assertj:assertj-core:3.26.3")
     testImplementation("org.checkerframework:framework-test:3.48.3") {
         exclude(group = "junit", module = "junit")
