@@ -2,14 +2,14 @@ package com.github.gavlyukovskiy.spring.checker;
 
 import org.junit.jupiter.api.Test;
 
-class NonConstructorInjectionTest extends BaseCheckerTest {
+class UnnecessaryAutowiredTest extends BaseCheckerTest {
 
-    NonConstructorInjectionTest() {
-        super(NonConstructorInjection.class);
+    UnnecessaryAutowiredTest() {
+        super(UnnecessaryAutowired.class);
     }
 
     @Test
-    void shouldFailOnFieldInjection() {
+    void shouldFailOnAutowiredSingleConstructor() {
         makeTestHelper().addSourceLines(
                 "TestConfiguration.java",
                 """
@@ -18,38 +18,31 @@ class NonConstructorInjectionTest extends BaseCheckerTest {
 
                 @Component
                 class TestConfiguration {
-                    // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
+                    // BUG: Diagnostic contains: @Autowired on a single unambiguous constructor is unnecessary
                     @Autowired
-                    private String dependency;
+                    public TestConfiguration(String dependency) {}
                 }
                 """
         ).doTest();
     }
 
     @Test
-    void shouldFailOnMethodInjection() {
+    void shouldPassOnSingleConstructorWithoutAutowired() {
         makeTestHelper().addSourceLines(
                 "TestConfiguration.java",
                 """
-                import org.springframework.beans.factory.annotation.Autowired;
                 import org.springframework.stereotype.Component;
 
                 @Component
                 class TestConfiguration {
-                    private String dependency;
-
-                    // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
-                    @Autowired
-                    public void setDependency(String dependency) {
-                        this.dependency = dependency;
-                    }
+                    public TestConfiguration(String dependency) {}
                 }
                 """
         ).doTest();
     }
 
     @Test
-    void shouldPassOnConstructorInjection() {
+    void shouldPassOnAmbiguousConstructorsWithAutowired() {
         makeTestHelper().addSourceLines(
                 "TestConfiguration.java",
                 """
@@ -58,12 +51,9 @@ class NonConstructorInjectionTest extends BaseCheckerTest {
 
                 @Component
                 class TestConfiguration {
-                    private final String dependency;
-
                     @Autowired
-                    public TestConfiguration(String dependency) {
-                        this.dependency = dependency;
-                    }
+                    public TestConfiguration(String dependency) {}
+                    public TestConfiguration() {}
                 }
                 """
         ).doTest();
