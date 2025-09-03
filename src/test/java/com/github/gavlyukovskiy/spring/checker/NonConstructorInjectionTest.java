@@ -18,8 +18,8 @@ class NonConstructorInjectionTest extends BaseCheckerTest {
 
                 @Component
                 class TestConfiguration {
-                    @Autowired
                     // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
+                    @Autowired
                     private String dependency;
                 }
                 """
@@ -38,8 +38,8 @@ class NonConstructorInjectionTest extends BaseCheckerTest {
                 class TestConfiguration {
                     private String dependency;
 
-                    @Autowired
                     // BUG: Diagnostic contains: Constructor injection should be preferred to @Autowired on fields and methods
+                    @Autowired
                     public void setDependency(String dependency) {
                         this.dependency = dependency;
                     }

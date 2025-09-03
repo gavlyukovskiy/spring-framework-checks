@@ -7,8 +7,8 @@ import com.google.errorprone.matchers.Description;
 import com.google.errorprone.util.ASTHelpers;
 import com.google.errorprone.util.MoreAnnotations;
 import com.sun.source.tree.AnnotationTree;
+import com.sun.tools.javac.code.Attribute;
 import com.sun.tools.javac.code.Symbol;
-import org.springframework.context.annotation.Configuration;
 
 import java.io.Serial;
 import java.util.function.Predicate;
@@ -31,7 +31,7 @@ public class ProxyTargetClassesOnConfiguration
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final Predicate<Symbol> CONFIGURATION_ANNOTATION = SpringAnnotationUtils.matcher(Configuration.class);
+    private static final Predicate<Symbol> CONFIGURATION_ANNOTATION = SpringAnnotationUtils.matcher("org.springframework.context.annotation.Configuration");
 
     @Override
     public Description matchAnnotation(AnnotationTree tree, VisitorState state) {
@@ -39,25 +39,17 @@ public class ProxyTargetClassesOnConfiguration
         if (sym == null) {
             return NO_MATCH;
         }
-        var annotation = SpringAnnotationUtils.getAnnotation(tree, CONFIGURATION_ANNOTATION, false);
-        boolean isMeta = false;
-        if (annotation == null) {
-            isMeta = true;
-            annotation = SpringAnnotationUtils.getAnnotation(tree, CONFIGURATION_ANNOTATION, true);
-            if (annotation == null) {
-                return NO_MATCH;
-            }
+
+        if (!CONFIGURATION_ANNOTATION.test(sym)) {
+            return NO_MATCH;
         }
-        boolean proxyBeanMethods = MoreAnnotations.getAnnotationValue(annotation, "proxyBeanMethods").map(v -> (boolean) v.getValue()).orElse(true);
+
+        var am = (Attribute.Compound) ASTHelpers.getAnnotationMirror(tree);
+        boolean proxyBeanMethods = MoreAnnotations.getAnnotationValue(am, "proxyBeanMethods").map(v -> (boolean) v.getValue()).orElse(true);
 
         if (!proxyBeanMethods) {
             return Description.NO_MATCH;
         }
-        var description = buildDescription(tree);
-        if (isMeta) {
-            description.setMessage("@%s is meta-annotated with @Configuration that must use 'proxyBeanMethods = false'"
-                                           .formatted(sym.getSimpleName()));
-        }
-        return description.build();
+        return describeMatch(tree);
     }
 }

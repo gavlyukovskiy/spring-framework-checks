@@ -63,28 +63,23 @@ class ProxyTargetClassesOnConfigurationTest extends BaseCheckerTest {
     }
 
     @Test
-    void shouldPassIfMetaAnnotatedWithProxyDisabled() {
+    void shouldFailIfMetaAnnotatedWithProxyEnabled() {
         makeTestHelper().addSourceLines(
-                "TestConfiguration.java",
+                "MetaConfigurationWithProxyEnabled.java",
                 """
-                import com.github.gavlyukovskiy.spring.checker.testannotations.MetaConfigurationWithProxyDisabled;
+                import org.springframework.context.annotation.Configuration;
+                
+                import java.lang.annotation.ElementType;
+                import java.lang.annotation.Retention;
+                import java.lang.annotation.RetentionPolicy;
+                import java.lang.annotation.Target;
 
-                @MetaConfigurationWithProxyDisabled
-                class TestConfiguration {}
-                """
-        ).doTest();
-    }
-
-    @Test
-    void shouldPassIfMetaAnnotatedWithProxyEnabled() {
-        makeTestHelper().addSourceLines(
-                "TestConfiguration.java",
-                """
-                import com.github.gavlyukovskiy.spring.checker.testannotations.MetaConfigurationWithProxyEnabled;
-
-                // BUG: Diagnostic contains: @MetaConfigurationWithProxyEnabled is meta-annotated with @Configuration that must use 'proxyBeanMethods = false'
-                @MetaConfigurationWithProxyEnabled
-                class TestConfiguration {}
+                @Target(ElementType.TYPE)
+                @Retention(RetentionPolicy.RUNTIME)
+                // BUG: Diagnostic contains: @Configuration must use 'proxyBeanMethods = false'
+                @Configuration
+                public @interface MetaConfigurationWithProxyEnabled {
+                }
                 """
         ).doTest();
     }

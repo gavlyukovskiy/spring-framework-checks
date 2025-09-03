@@ -54,9 +54,9 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "org.checkerframework"
-            artifactId = "templatefora-checker"
-            version = "0.1-SNAPSHOT"
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
 
             from(components["java"])
         }
