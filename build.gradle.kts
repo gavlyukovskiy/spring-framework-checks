@@ -50,7 +50,7 @@ dependencies {
     testImplementation("com.google.errorprone:error_prone_core:2.32.0")
 
     errorprone("com.google.errorprone:error_prone_core:2.32.0")
-    errorprone("com.uber.nullaway:nullaway:0.12.2")
+    errorprone("com.uber.nullaway:nullaway:0.12.9")
 }
 
 // Add `mavenLocal()` in `repositories`, then run `./gradlew publishToMavenLocal`
