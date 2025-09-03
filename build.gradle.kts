@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     implementation("org.checkerframework:checker:3.48.3")
-    implementation("org.checkerframework:checker-qual:3.49.1")
+    implementation("org.checkerframework:checker-qual:3.50.0")
     implementation("com.google.errorprone:error_prone_check_api:2.37.0")
     implementation("org.jspecify:jspecify:1.0.0")
     implementation("com.google.auto.service:auto-service-annotations:1.1.1")
