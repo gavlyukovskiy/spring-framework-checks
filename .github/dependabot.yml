@@ -3,5 +3,12 @@ updates:
 - package-ecosystem: gradle
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+  assignees:
+    - gavlyukovskiy
+  groups:
+    java-minor:
+      update-types:
+        - minor
+        - patch
   open-pull-requests-limit: 10
