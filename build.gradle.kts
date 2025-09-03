@@ -35,11 +35,11 @@ dependencies {
 
     compileOnly("com.google.errorprone:javac:9+181-r4173-1")
 
-    // Testing
-    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.platform:junit-platform-launcher")
     testImplementation("org.springframework:spring-context:6.2.1")
     testImplementation("org.assertj:assertj-core:3.26.3")
     testImplementation("org.checkerframework:framework-test:3.48.3") {
