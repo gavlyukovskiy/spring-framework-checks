@@ -47,4 +47,25 @@ class NonConstructorInjectionTest extends BaseCheckerTest {
                 """
         ).doTest();
     }
+
+    @Test
+    void shouldPassOnConstructorInjection() {
+        makeTestHelper().addSourceLines(
+                "TestConfiguration.java",
+                """
+                import org.springframework.beans.factory.annotation.Autowired;
+                import org.springframework.stereotype.Component;
+
+                @Component
+                class TestConfiguration {
+                    private final String dependency;
+
+                    @Autowired
+                    public TestConfiguration(String dependency) {
+                        this.dependency = dependency;
+                    }
+                }
+                """
+        ).doTest();
+    }
 }

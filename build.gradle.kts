@@ -29,6 +29,8 @@ dependencies {
     implementation("org.checkerframework:checker-qual:3.49.1")
     implementation("com.google.errorprone:error_prone_check_api:2.37.0")
     implementation("org.jspecify:jspecify:1.0.0")
+    implementation("com.google.auto.service:auto-service-annotations:1.1.1")
+    annotationProcessor("com.google.auto.service:auto-service:1.1.1")
     compileOnly("org.springframework:spring-context:6.2.1")
 
     compileOnly("com.google.errorprone:javac:9+181-r4173-1")
@@ -44,6 +46,8 @@ dependencies {
         exclude(group = "junit", module = "junit")
     }
     testImplementation("com.google.errorprone:error_prone_test_helpers:2.36.0")
+
+    testImplementation("com.google.errorprone:error_prone_core:2.32.0")
 
     errorprone("com.google.errorprone:error_prone_core:2.32.0")
     errorprone("com.uber.nullaway:nullaway:0.12.2")
@@ -72,6 +76,8 @@ tasks {
 
     withType<JavaCompile>().configureEach {
         options.compilerArgs.add("-Xlint:all")
+        options.compilerArgs.add("-Xlint:-processing")
+        options.compilerArgs.add("-Xlint:-serial")
         options.compilerArgs.add("-Werror")
         options.encoding = "UTF-8"
         options.errorprone {

@@ -1,5 +1,6 @@
 package com.github.gavlyukovskiy.spring.checker;
 
+import com.google.auto.service.AutoService;
 import com.google.errorprone.BugPattern;
 import com.google.errorprone.VisitorState;
 import com.google.errorprone.bugpatterns.BugChecker;
@@ -10,7 +11,6 @@ import com.sun.source.tree.AnnotationTree;
 import com.sun.tools.javac.code.Attribute;
 import com.sun.tools.javac.code.Symbol;
 
-import java.io.Serial;
 import java.util.function.Predicate;
 
 import static com.google.errorprone.matchers.Description.NO_MATCH;
@@ -18,18 +18,14 @@ import static com.google.errorprone.matchers.Description.NO_MATCH;
 /**
  * Checks that {@link org.springframework.context.annotation.Configuration} classes do not use 'proxyBeanMethods = true'
  */
+@AutoService(BugChecker.class)
 @BugPattern(
         summary = "@Configuration must use 'proxyBeanMethods = false'",
         severity = BugPattern.SeverityLevel.ERROR,
         linkType = BugPattern.LinkType.CUSTOM,
         link = CustomLink.URL + "ProxyTargetClassesOnConfiguration"
 )
-public class ProxyTargetClassesOnConfiguration
-        extends BugChecker
-        implements BugChecker.AnnotationTreeMatcher {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class ProxyTargetClassesOnConfiguration extends BugChecker implements BugChecker.AnnotationTreeMatcher {
 
     private static final Predicate<Symbol> CONFIGURATION_ANNOTATION = SpringAnnotationUtils.matcher("org.springframework.context.annotation.Configuration");
 
