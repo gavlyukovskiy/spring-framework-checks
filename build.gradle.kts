@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jspecify:jspecify:1.0.0")
     implementation("com.google.auto.service:auto-service-annotations:1.1.1")
     annotationProcessor("com.google.auto.service:auto-service:1.1.1")
-    compileOnly("org.springframework:spring-context:6.2.1")
+    compileOnly("org.springframework:spring-context:6.2.10")
 
     compileOnly("com.google.errorprone:javac:9+181-r4173-1")
 
@@ -40,7 +40,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.springframework:spring-context:6.2.1")
+    testImplementation("org.springframework:spring-context:6.2.10")
     testImplementation("org.assertj:assertj-core:3.26.3")
     testImplementation("org.checkerframework:framework-test:3.48.3") {
         exclude(group = "junit", module = "junit")
