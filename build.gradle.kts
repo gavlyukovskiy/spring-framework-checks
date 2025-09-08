@@ -3,7 +3,7 @@ import net.ltgt.gradle.errorprone.errorprone
 plugins {
     `java-library`
     `maven-publish`
-    id("net.ltgt.errorprone") version "4.1.0"
+    id("net.ltgt.errorprone") version "4.3.0"
     id("com.adarshr.test-logger") version "4.0.0"
 }
 
@@ -25,13 +25,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.checkerframework:checker:3.48.3")
-    implementation("org.checkerframework:checker-qual:3.49.1")
-    implementation("com.google.errorprone:error_prone_check_api:2.37.0")
+    implementation("org.checkerframework:checker:3.50.0")
+    implementation("org.checkerframework:checker-qual:3.50.0")
+    implementation("com.google.errorprone:error_prone_check_api:2.41.0")
     implementation("org.jspecify:jspecify:1.0.0")
     implementation("com.google.auto.service:auto-service-annotations:1.1.1")
     annotationProcessor("com.google.auto.service:auto-service:1.1.1")
-    compileOnly("org.springframework:spring-context:6.2.1")
+    compileOnly("org.springframework:spring-context:6.2.10")
 
     compileOnly("com.google.errorprone:javac:9+181-r4173-1")
 
@@ -40,17 +40,17 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.springframework:spring-context:6.2.1")
-    testImplementation("org.assertj:assertj-core:3.26.3")
-    testImplementation("org.checkerframework:framework-test:3.48.3") {
+    testImplementation("org.springframework:spring-context:6.2.10")
+    testImplementation("org.assertj:assertj-core:3.27.4")
+    testImplementation("org.checkerframework:framework-test:3.50.0") {
         exclude(group = "junit", module = "junit")
     }
-    testImplementation("com.google.errorprone:error_prone_test_helpers:2.36.0")
+    testImplementation("com.google.errorprone:error_prone_test_helpers:2.41.0")
 
-    testImplementation("com.google.errorprone:error_prone_core:2.32.0")
+    testImplementation("com.google.errorprone:error_prone_core:2.41.0")
 
-    errorprone("com.google.errorprone:error_prone_core:2.32.0")
-    errorprone("com.uber.nullaway:nullaway:0.12.2")
+    errorprone("com.google.errorprone:error_prone_core:2.41.0")
+    errorprone("com.uber.nullaway:nullaway:0.12.9")
 }
 
 // Add `mavenLocal()` in `repositories`, then run `./gradlew publishToMavenLocal`
